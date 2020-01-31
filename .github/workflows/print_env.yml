@@ -15,6 +15,6 @@ jobs:
         echo sha: ${GITHUB_SHA}
         echo ref: ${GITHUB_REF}
         echo changed files:
-        for fname in $(git show --name-only --format=tformat: ${GITHUB_SHA}); do
+        for fname in $(git show --name-status --format=tformat: ${GITHUB_SHA}); do
           echo $fname
         done
