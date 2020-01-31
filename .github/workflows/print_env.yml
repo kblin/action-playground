@@ -18,6 +18,8 @@ jobs:
       id: getfiles
       run: |
         echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{github.sha}} | xargs)"
+        echo "::set-output name=test_value::bob"
     - name: Print changed files
       run: |
+        echo bob: ${{ steps.getfiles.outputs.bob }}
         echo ${{ steps.getfiles.outputs.files }}
