@@ -14,7 +14,8 @@ jobs:
         echo workspace: ${GITHUB_WORKSPACE}
         echo sha: ${GITHUB_SHA}
         echo ref: ${GITHUB_REF}
-        echo changed files:
-        for fname in $(git show --name-status --format=tformat: ${GITHUB_SHA}); do
+    - name: Print changed files
+      run: |
+        for fname in $(git diff-tree --no-commit-id --name-only -r ${{github.sha}}); do
           echo $fname
         done
