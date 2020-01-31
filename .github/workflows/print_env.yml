@@ -14,8 +14,10 @@ jobs:
         echo workspace: ${GITHUB_WORKSPACE}
         echo sha: ${GITHUB_SHA}
         echo ref: ${GITHUB_REF}
+    - name: Get changed files
+      id: getfiles
+      run: |
+        echo "::Set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{github.sha}} | xargs)"
     - name: Print changed files
       run: |
-        for fname in $(git diff-tree --no-commit-id --name-only -r ${{github.sha}}); do
-          echo $fname
-        done
+        echo ${{ steps.getfiles.outputs.files }}
